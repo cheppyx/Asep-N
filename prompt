@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator By Asep N</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .input-group label {
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .input-group input[type="text"],
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #2d3748;
+            transition: all 0.2s ease-in-out;
+        }
+        .input-group input[type="text"]:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #4c51bf;
+            box-shadow: 0 0 0 3px rgba(76, 81, 191, 0.2);
+        }
+        .btn-primary {
+            background-color: #4c51bf;
+            color: #ffffff;
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+            box-shadow: 0 4px 8px rgba(76, 81, 191, 0.3);
+        }
+        .btn-primary:hover {
+            background-color: #34388e;
+        }
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-secondary:hover {
+            background-color: #cbd5e0;
+        }
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the text */
+            left: 50%;
+            margin-left: -100px; /* Center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.85rem;
+        }
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #4c51bf;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: none; /* Hidden by default */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="container bg-white p-6 rounded-xl shadow-lg mt-8 mb-8">
+        <h1 class="text-4xl font-bold text-center mb-8 text-indigo-700">Generator Prompt Video AI</h1>
+        <p class="text-center text-gray-600 mb-8">Prompt super lengkap untuk Video Veo 3 atau pun Flow Veo 3.Semoga bermanfaat,Jangan Lupa Follow Tiktok @cheppyx </p>
+        <!-- Contoh Prompt -->
+        <div class="card bg-indigo-50 border-indigo-200">
+            <h2 class="text-2xl font-semibold mb-4 text-indigo-600">Contoh Prompt Jadi</h2>
+            <div class="input-group">
+                <label for="examplePromptSelect" class="block text-gray-700 text-sm font-bold mb-2">Pilih Contoh:</label>
+                <select id="examplePromptSelect" class="shadow border border-indigo-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">-- Pilih Contoh Prompt --</option>
+                    <option value="action_chase">Adegan Aksi: Pengejaran Mobil</option>
+                    <option value="dramatic_dialogue">Adegan Dramatis: Dialog di Kafe</option>
+                    <option value="fantasy_adventure">Adegan Fantasi: Petualangan di Hutan Ajaib</option>
+                    <option value="mclaren_spider">Adegan Aksi: Mobil Super Otomatis (McLaren 720S Spider)</option>
+                </select>
+            </div>
+            <p class="mt-2 text-sm text-gray-500 italic">Pilihan ini akan mengisi semua formulir secara otomatis untuk Anda.</p>
+        </div>
+        <!-- Karakter -->
+        <div class="card">
+            <h2 class="text-2xl font-semibold mb-4 text-indigo-600">1. Karakter</h2>
+            <div class="mb-4">
+                <label for="numCharactersSelect" class="block text-gray-700 text-sm font-bold mb-2">Jumlah Karakter:</label>
+                <select id="numCharactersSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="1">1 Karakter</option>
+                    <option value="2">2 Karakter</option>
+                    <option value="3">3 Karakter</option>
+                    <option value="4">4 Karakter</option>
+                    <option value="5">5 Karakter</option>
+                </select>
+            </div>
+            <div id="characterDetailsContainer">
+                <!-- Character details will be dynamically added here -->
+            </div>
+        </div>
+        <!-- Latar Belakang -->
+        <div class="card">
+            <h2 class="text-2xl font-semibold mb-4 text-indigo-600">2. Latar Belakang</h2>
+            <div class="input-group">
+                <label for="backgroundManualDetails" class="block text-gray-700 text-sm font-bold mb-2">Detail Latar Belakang Manual (wajib):</label>
+                <textarea id="backgroundManualDetails" rows="3" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'Pemandangan kota metropolitan di malam hari dengan lampu-lampu gedung yang berkilauan dan jalanan basah setelah hujan.'"></textarea>
+            </div>
+        </div>
+        <!-- Dialog -->
+        <div class="card">
+            <h2 class="text-2xl font-semibold mb-4 text-indigo-600">3. Dialog</h2>
+            <div class="input-group mb-4">
+                <label for="interCharacterDialogue" class="block text-gray-700 text-sm font-bold mb-2">Skenario Dialog Lengkap (gunakan format 'Nama Karakter: Dialog'):</label>
+                <textarea id="interCharacterDialogue" rows="8" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh:&#10;John: Halo, apa kabar?&#10;Jane: Baik, kamu?&#10;John: Aku juga baik."></textarea>
+                <p class="mt-2 text-sm text-gray-500 italic">Untuk setiap baris dialog, pastikan nama karakter sesuai dengan nama yang diisi di bagian Karakter, agar pengaturan suara per karakter dapat diterapkan.</p>
+            </div>
+            <div class="mb-4">
+                <label for="narratorDialogue" class="block text-gray-700 text-sm font-bold mb-2">Narasi/Dialog Umum (jika ada, tanpa karakter spesifik):</label>
+                <textarea id="narratorDialogue" rows="3" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'Di pagi yang cerah, kota Jakarta mulai terbangun.'"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="narratorVoiceStyle" class="flex items-center">
+                    Gaya Suara Narator:
+                    <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="tooltip-text">Kualitas atau karakteristik suara narator.</span>
+                    </span>
+                </label>
+                <select id="narratorVoiceStyle" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">Pilih Gaya Suara</option>
+                    <option value="Pria (Bariton)">Pria (Bariton) - Suara pria rendah dan dalam.</option>
+                    <option value="Pria (Tenor)">Pria (Tenor) - Suara pria tinggi dan cerah.</option>
+                    <option value="Wanita (Sopran)">Wanita (Sopran) - Suara wanita tinggi dan jernih.</option>
+                    <option value="Wanita (Mezzo-Sopran)">Wanita (Mezzo-Sopran) - Suara wanita sedang, penuh.</option>
+                    <option value="Suara Transgender/Feminin">Suara Transgender/Feminin - Suara yang cenderung lebih tinggi atau feminin.</option>
+                    <option value="Suara Anak-anak">Suara Anak-anak - Suara khas anak kecil.</option>
+                    <option value="Suara Tua">Suara Tua - Suara yang menunjukkan usia lanjut, mungkin serak atau bergetar.</option>
+                    <option value="Suara Robotik">Suara Robotik - Suara mekanis, tanpa emosi.</option>
+                    <option value="Suara Serak">Suara Serak - Suara yang kasar atau parau.</option>
+                    <option value="Suara Jernih">Suara Jernih - Suara yang jelas dan bersih.</option>
+                    <option value="Suara Berbisik">Suara Berbisik - Suara sangat pelan, rahasia.</option>
+                    <option value="Informative (Jelas dan Lugas)">Informative (Jelas dan Lugas) - Gaya bicara informatif, netral.</option>
+                    <option value="Calm (Tenang dan Menenangkan)">Calm (Tenang dan Menenangkan) - Gaya bicara tenang, menenangkan.</option>
+                    <option value="Energetic (Bersemangat dan Dinamis)">Energetic (Bersemangat dan Dinamis) - Gaya bicara penuh semangat.</option>
+                    <option value="Mysterious (Misterius dan Menarik)">Mysterious (Misterius dan Menarik) - Gaya bicara misterius.</option>
+                    <option value="Authoritative (Berwibawa dan Tegas)">Authoritative (Berwibawa dan Tegas) - Gaya bicara berwibawa.</option>
+                    <option value="Friendly (Ramah dan Hangat)">Friendly (Ramah dan Hangat) - Gaya bicara ramah, hangat.</option>
+                    <option value="Dramatic (Dramatis dan Penuh Emosi)">Dramatic (Dramatis dan Penuh Emosi) - Gaya bicara dramatis.</option>
+                    <option value="other">Lainnya (Manual)</option>
+                </select>
+                <input type="text" id="narratorVoiceStyleManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan gaya suara narator manual">
+            </div>
+        </div>
+        <!-- Pengaturan Kamera -->
+        <div class="card">
+            <h2 class="text-2xl font-semibold mb-4 text-indigo-600">4. Pengaturan Kamera</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="input-group">
+                    <label for="cameraPositionSelect" class="flex items-center">
+                        Posisi Kamera:
+                        <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="tooltip-text">Posisi relatif kamera terhadap subjek.</span>
+                        </span>
+                    </label>
+                    <select id="cameraPositionSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="default">Pilih Posisi</option>
+                        <option value="Eye-level shot (Normal)">Eye-level shot (Normal) - Setinggi mata subjek.</option>
+                        <option value="High-angle shot (Bird's-eye view)">High-angle shot (Bird's-eye view) - Dari atas, membuat subjek terlihat kecil.</option>
+                        <option value="Low-angle shot (Worm's-eye view)">Low-angle shot (Worm's-eye view) - Dari bawah, membuat subjek terlihat besar/dominan.</option>
+                        <option value="Over-the-shoulder shot">Over-the-shoulder shot - Di atas bahu karakter lain.</option>
+                        <option value="Point-of-view (POV) shot">Point-of-view (POV) shot - Dari sudut pandang karakter.</option>
+                        <option value="Dutch angle (Canted angle)">Dutch angle (Canted angle) - Kamera miring, menciptakan kesan tidak stabil.</option>
+                        <option value="Close-up">Close-up - Fokus pada detail wajah/objek.</option>
+                        <option value="Medium shot">Medium shot - Dari pinggang ke atas.</option>
+                        <option value="Long shot (Wide shot)">Long shot (Wide shot) - Menampilkan seluruh subjek dan lingkungannya.</option>
+                        <option value="Extreme close-up">Extreme close-up - Detail sangat dekat.</option>
+                        <option value="Full shot">Full shot - Seluruh tubuh karakter terlihat.</option>
+                        <option value="Establishing shot">Establishing shot - Menunjukkan lokasi umum.</option>
+                        <option value="other">Lainnya (Manual)</option>
+                    </select>
+                    <input type="text" id="cameraPositionManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan posisi kamera manual">
+                </div>
+                <div class="input-group">
+                    <label for="cameraStyleSelect" class="flex items-center">
+                        Gaya Kamera:
+                        <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="tooltip-text">Estetika visual dan nuansa yang ingin dicapai.</span>
+                    </span>
+                </label>
+                <select id="cameraStyleSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">Pilih Gaya</option>
+                    <option value="Cinematic">Cinematic - Kualitas film, dramatis.</option>
+                    <option value="Documentary">Documentary - Realistis, seringkali handheld.</option>
+                    <option value="Handheld (Shaky cam)">Handheld (Shaky cam) - Gerakan kamera yang tidak stabil, menciptakan kesan mendesak.</option>
+                    <option value="Static (Tripod shot)">Static (Tripod shot) - Kamera diam di tempat.</option>
+                    <option value="Steadicam (Smooth tracking)">Steadicam (Smooth tracking) - Gerakan kamera yang sangat halus, mengikuti subjek.</option>
+                    <option value="Drone shot (Aerial view)">Drone shot (Aerial view) - Pandangan dari atas, seringkali luas.</option>
+                    <option value="Security camera style">Security camera style - Sudut pandang kamera pengawas.</option>
+                    <option value="Found footage style">Found footage style - Terlihat seperti rekaman amatir yang ditemukan.</option>
+                    <option value="GoPro style">GoPro style - Sudut pandang lebar, seringkali dari perspektif orang pertama.</option>
+                    <option value="other">Lainnya (Manual)</option>
+                </select>
+                <input type="text" id="cameraStyleManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan gaya kamera manual">
+            </div>
+            <div class="input-group">
+                <label for="cameraEffectSelect" class="flex items-center">
+                    Efek Kamera:
+                    <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="tooltip-text">Efek visual tambahan pada gambar.</span>
+                    </span>
+                </label>
+                <select id="cameraEffectSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">Pilih Efek</option>
+                    <option value="Depth of Field (Shallow)">Depth of Field (Shallow) - Latar belakang buram, fokus pada subjek.</option>
+                    <option value="Depth of Field (Deep)">Depth of Field (Deep) - Semua dalam fokus, latar belakang dan foreground jelas.</option>
+                    <option value="Motion Blur">Motion Blur - Objek bergerak terlihat buram.</option>
+                    <option value="Lens Flare">Lens Flare - Cahaya menyebar dari sumber cahaya terang.</option>
+                    <option value="Vignette">Vignette - Sudut gambar lebih gelap dari tengah.</option>
+                    <option value="Chromatic Aberration">Chromatic Aberration - Warna terpisah di tepi objek.</option>
+                    <option value="Grain/Noise">Grain/Noise - Tekstur bintik-bintik seperti film lama.</option>
+                    <option value="Color Grading (Warm)">Color Grading (Warm) - Nada warna hangat (kuning, oranye).</option>
+                    <option value="Color Grading (Cool)">Color Grading (Cool) - Nada warna dingin (biru, hijau).</option>
+                    <option value="Color Grading (Desaturated)">Color Grading (Desaturated) - Warna pudar/kurang jenuh.</option>
+                    <option value="Color Grading (Vibrant)">Color Grading (Vibrant) - Warna cerah dan jenuh.</option>
+                    <option value="Slow Motion">Slow Motion - Gerakan diperlambat.</option>
+                    <option value="Fast Motion (Timelapse)">Fast Motion (Timelapse) - Gerakan dipercepat.</option>
+                    <option value="Fisheye Distortion">Fisheye Distortion - Distorsi lensa mata ikan.</option>
+                    <option value="Zoom Blur">Zoom Blur - Efek buram saat zoom.</option>
+                    <option value="other">Lainnya (Manual)</option>
+                </select>
+                <input type="text" id="cameraEffectManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan efek kamera manual">
+            </div>
+            <div class="input-group">
+                <label for="cameraLensSelect" class="flex items-center">
+                    Lensa Kamera:
+                    <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="tooltip-text">Jenis lensa untuk perspektif tertentu.</span>
+                    </span>
+                </label>
+                <select id="cameraLensSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">Pilih Lensa</option>
+                    <option value="Wide-angle lens (e.g., 16mm, 24mm)">Wide-angle lens (e.g., 16mm, 24mm) - Bidang pandang luas.</option>
+                    <option value="Standard lens (e.g., 50mm)">Standard lens (e.g., 50mm) - Perspektif alami, mirip mata manusia.</option>
+                    <option value="Telephoto lens (e.g., 85mm, 200mm)">Telephoto lens (e.g., 85mm, 200mm) - Memperbesar objek jauh, kompresi latar belakang.</option>
+                    <option value="Macro lens">Macro lens - Untuk detail sangat kecil.</option>
+                    <option value="Prime lens">Prime lens - Lensa dengan focal length tetap, kualitas gambar tinggi.</option>
+                    <option value="Zoom lens">Zoom lens - Focal length variabel, fleksibel.</option>
+                    <option value="Anamorphic lens">Anamorphic lens - Menciptakan efek lensa flare horizontal dan bokeh oval.</option>
+                    <option value="Tilt-shift lens">Tilt-shift lens - Untuk efek miniatur atau koreksi perspektif.</option>
+                    <option value="other">Lainnya (Manual)</option>
+                </select>
+                <input type="text" id="cameraLensManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan lensa kamera manual">
+            </div>
+            <div class="input-group">
+                <label for="cameraMovementSelect" class="flex items-center">
+                    Gerakan Kamera:
+                    <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="tooltip-text">Cara kamera bergerak selama pengambilan gambar.</span>
+                    </span>
+                </label>
+                <select id="cameraMovementSelect" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">Pilih Gerakan</option>
+                    <option value="Pan (Horizontal swivel)">Pan (Horizontal swivel) - Kamera berputar horizontal dari satu titik.</option>
+                    <option value="Tilt (Vertical swivel)">Tilt (Vertical swivel) - Kamera berputar vertikal dari satu titik.</option>
+                    <option value="Dolly (Forward/Backward on tracks)">Dolly (Forward/Backward on tracks) - Kamera bergerak maju/mundur di atas rel.</option>
+                    <option value="Tracking shot (Parallel to subject)">Tracking shot (Parallel to subject) - Kamera bergerak sejajar dengan subjek.</option>
+                    <option value="Crane/Jib shot (Vertical movement)">Crane/Jib shot (Vertical movement) - Kamera bergerak naik/turun secara vertikal.</option>
+                    <option value="Zoom In/Out">Zoom In/Out - Mengubah focal length lensa.</option>
+                    <option value="Pedestal">Pedestal - Kamera bergerak naik/turun tanpa mengubah posisi horizontal.</option>
+                    <option value="Handheld movement">Handheld movement - Gerakan alami saat dipegang tangan.</option>
+                    <option value="Stabilized movement (Gimbal)">Stabilized movement (Gimbal) - Gerakan halus dan stabil.</option>
+                    <option value="Arc shot (Circling around subject)">Arc shot (Circling around subject) - Kamera bergerak melingkar mengelilingi subjek.</option>
+                    <option value="other">Lainnya (Manual)</option>
+                </select>
+                <input type="text" id="cameraMovementManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan gerakan kamera manual">
+            </div>
+            <div class="input-group">
+                <label for="lightingTypeSelect" class="flex items-center">
+                    Jenis Pencahayaan:
+                    <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="tooltip-text">Sumber atau kualitas cahaya.</span>
+                    </span>
+                </label>
+                <select id="lightingTypeSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">Pilih Jenis Pencahayaan</option>
+                    <option value="Natural Light">Natural Light - Cahaya alami (matahari, bulan).</option>
+                    <option value="Artificial Light">Artificial Light - Cahaya buatan (lampu, obor).</option>
+                    <option value="Studio Lighting">Studio Lighting - Pencahayaan terkontrol, biasanya di studio.</option>
+                    <option value="Low-key Lighting">Low-key Lighting - Pencahayaan minim, kontras tinggi, area gelap dominan.</option>
+                    <option value="High-key Lighting">High-key Lighting - Pencahayaan terang, kontras rendah, area terang dominan.</option>
+                    <option value="Silhouette">Silhouette - Subjek gelap di depan latar belakang terang.</option>
+                    <option value="Backlighting">Backlighting - Cahaya dari belakang subjek.</option>
+                    <option value="Rim Lighting">Rim Lighting - Cahaya tipis di sekeliling tepi subjek.</option>
+                    <option value="Soft Lighting">Soft Lighting - Bayangan lembut, transisi halus.</option>
+                    <option value="Hard Lighting">Hard Lighting - Bayangan tajam, kontras tinggi.</option>
+                    <option value="other">Lainnya (Manual)</option>
+                </select>
+                <input type="text" id="lightingTypeManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan jenis pencahayaan manual">
+            </div>
+            <div class="input-group">
+                <label for="lightingDirectionSelect" class="flex items-center">
+                    Arah Pencahayaan:
+                    <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="tooltip-text">Arah datangnya cahaya terhadap subjek.</span>
+                    </span>
+                </label>
+                <select id="lightingDirectionSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">Pilih Arah Pencahayaan</option>
+                    <option value="Front Lighting">Front Lighting - Cahaya dari depan subjek.</option>
+                    <option value="Side Lighting">Side Lighting - Cahaya dari samping subjek, menciptakan bayangan dramatis.</option>
+                    <option value="Top Lighting">Top Lighting - Cahaya dari atas subjek.</option>
+                    <option value="Bottom Lighting">Bottom Lighting - Cahaya dari bawah subjek, seringkali untuk efek menyeramkan.</option>
+                    <option value="Backlighting">Backlighting - Cahaya dari belakang subjek, menciptakan siluet atau efek halo.</option>
+                    <option value="other">Lainnya (Manual)</option>
+                </select>
+                <input type="text" id="lightingDirectionManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan arah pencahayaan manual">
+            </div>
+            <div class="input-group">
+                <label for="lightingColor">Warna Pencahayaan:</label>
+                <input type="text" id="lightingColor" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'warm yellow, cool blue, neon green, natural daylight'">
+            </div>
+            <div class="input-group">
+                <label for="colorPaletteSelect" class="flex items-center">
+                    Palet Warna:
+                    <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="tooltip-text">Skema warna dominan dalam adegan.</span>
+                    </span>
+                </label>
+                <select id="colorPaletteSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">Pilih Palet Warna</option>
+                    <option value="Vibrant">Vibrant - Warna cerah dan jenuh.</option>
+                    <option value="Muted">Muted - Warna pudar atau kurang jenuh.</option>
+                    <option value="Monochromatic">Monochromatic - Berbagai nuansa satu warna.</option>
+                    <option value="Complementary">Complementary - Warna berlawanan di roda warna (misal: biru-oranye).</option>
+                    <option value="Analogous">Analogous - Warna bersebelahan di roda warna (misal: biru-hijau-kuning).</option>
+                    <option value="Pastel">Pastel - Warna lembut dan terang.</option>
+                    <option value="Dark and Moody">Dark and Moody - Warna gelap, menciptakan suasana suram.</option>
+                    <option value="Bright and Airy">Bright and Airy - Warna terang, menciptakan suasana ceria.</option>
+                    <option value="other">Lainnya (Manual)</option>
+                </select>
+                <input type="text" id="colorPaletteManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan palet warna manual">
+            </div>
+            <div class="input-group">
+                <label for="overallToneSelect" class="flex items-center">
+                    Nada Visual Keseluruhan:
+                    <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="tooltip-text">Suasana emosional atau gaya umum adegan.</span>
+                    </span>
+                </label>
+                <select id="overallToneSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="default">Pilih Nada Visual</option>
+                    <option value="Warm">Warm - Suasana hangat, nyaman, ceria.</option>
+                    <option value="Cool">Cool - Suasana dingin, melankolis, serius.</option>
+                    <option value="Neutral">Neutral - Suasana netral, objektif.</option>
+                    <option value="Vintage">Vintage - Estetika retro, nostalgia.</option>
+                    <option value="Futuristic">Futuristic - Estetika modern, sci-fi.</option>
+                    <option value="Gritty">Gritty - Suasana keras, realistis, gelap.</option>
+                    <option value="Dreamy">Dreamy - Suasana seperti mimpi, lembut, tidak fokus.</option>
+                    <option value="Horror">Horror - Suasana menakutkan, mencekam.</option>
+                    <option value="Comedy">Comedy - Suasana ceria, ringan.</option>
+                    <option value="Action">Action - Suasana dinamis, penuh gerakan.</option>
+                    <option value="other">Lainnya (Manual)</option>
+                </select>
+                <input type="text" id="overallToneManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan nada visual manual">
+            </div>
+        </div>
+    </div>
+    <!-- Prompt Negatif -->
+    <div class="card">
+        <h2 class="text-2xl font-semibold mb-4 text-indigo-600">5. Prompt Negatif</h2>
+        <div class="mb-4">
+            <label for="negativePrompt" class="block text-gray-700 text-sm font-bold mb-2">Prompt Negatif (apa yang TIDAK ingin Anda lihat):</label>
+            <textarea id="negativePrompt" rows="3" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'buruk, cacat, distorsi, tangan aneh, watermark, teks'"></textarea>
+        </div>
+    </div>
+    <!-- Audio -->
+    <div class="card">
+        <h2 class="text-2xl font-semibold mb-4 text-indigo-600">6. Audio</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="input-group">
+                <label for="atmosphereSound">Suara Suasana:</label>
+                <input type="text" id="atmosphereSound" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'suara hujan deras, gemuruh ombak, hiruk pikuk kota, kicauan burung'">
+            </div>
+            <div class="input-group">
+                <label for="soundEffects">Efek Suara Spesifik:</label>
+                <input type="text" id="soundEffects" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'suara langkah kaki, dentuman pintu, deru mesin mobil, ledakan, suara tembakan'">
+            </div>
+            <div class="input-group">
+                <label for="backgroundMusic">Musik Latar (Deskripsi Genre/Mood):</label>
+                <input type="text" id="backgroundMusic" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'orkestra epik, melodi piano sedih, beat hip-hop, jazz lembut, pop ceria'">
+            </div>
+            <div class="input-group">
+                <label for="narratorVoice">Suara Narator (Deskripsi Umum):</label>
+                <input type="text" id="narratorVoice" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'suara narator pria dewasa, suara wanita lembut, suara anak-anak ceria'">
+            </div>
+            <div class="input-group col-span-full">
+                <label for="audioManual">Input Manual Detail Audio (opsional):</label>
+                <input type="text" id="audioManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'Suara suasana hutan tropis yang ramai dengan suara monyet dan burung eksotis, diselingi suara tawa anak-anak yang jauh.'">
+            </div>
+        </div>
+    </div>
+    <!-- Gaya Visual -->
+    <div class="card">
+        <h2 class="text-2xl font-semibold mb-4 text-indigo-600">7. Gaya Visual</h2>
+        <div class="flex flex-wrap gap-4 mb-4">
+            <label class="inline-flex items-center">
+                <input type="radio" name="visualStyle" value="realistis" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">Realistis</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="visualStyle" value="cinematik" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">Sinematik</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="visualStyle" value="super_asli_nyata" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">Super Asli Nyata</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="visualStyle" value="animasi" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">Animasi</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="visualStyle" value="kartun" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">Kartun</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="visualStyle" value="lukisan" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">Lukisan</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="visualStyle" value="fotorealistik" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">Fotorealistik</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="visualStyle" value="gaya_lain" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">Gaya Lain:</span>
+            </label>
+            <input type="text" id="otherVisualStyle" class="shadow appearance-none border rounded-lg py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex-grow" placeholder="Sebutkan gaya visual lain">
+        </div>
+    </div>
+    <!-- Format Output -->
+    <div class="card">
+        <h2 class="text-2xl font-semibold mb-4 text-indigo-600">8. Format Output</h2>
+        <div class="flex flex-wrap gap-4 mb-4">
+            <label class="inline-flex items-center">
+                <input type="radio" name="outputFormat" value="indonesia" class="form-radio text-indigo-600" checked>
+                <span class="ml-2 text-gray-700">Bahasa Indonesia</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="outputFormat" value="english" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">English</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" name="outputFormat" value="json" class="form-radio text-indigo-600">
+                <span class="ml-2 text-gray-700">JSON</span>
+            </label>
+        </div>
+    </div>
+    <div class="text-center mt-8">
+        <button id="generatePrompt" class="btn-primary flex items-center justify-center mx-auto">
+            <div id="generateLoadingSpinner" class="loading-spinner mr-2"></div>
+            Generate Prompt
+        </button>
+    </div>
+    <!-- Hasil Prompt -->
+    <div class="card mt-8">
+        <h2 class="text-2xl font-semibold mb-4 text-indigo-600">Hasil Prompt</h2>
+        <div class="relative">
+            <textarea id="generatedPrompt" rows="15" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 font-mono text-sm" readonly placeholder="Prompt yang dihasilkan akan muncul di sini..."></textarea>
+            <button id="copyPrompt" class="absolute top-2 right-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-1 px-2 rounded-md text-xs">
+                Salin
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    // --- Data Contoh Prompt ---
+    const examplePrompts = {
+        'action_chase': {
+            numCharacters: '2',
+            characters: [
+                {
+                    name: 'John', race: 'Eropa (Kaukasoid)', gender: 'Pria', age: '30-an', bodyShape: 'atletis, berotot', face: 'wajah tajam, brewok tipis', clothing: 'jaket kulit hitam, jeans robek', props: 'pistol di pinggang', vehicle: 'mobil sport vintage', vehicleDetails: 'cat merah mengkilap, knalpot racing', vehicleControl: 'mengemudi agresif, menikung tajam', automaticControl: '', staticPosition: '', actionScenario: 'berlari ke mobil, mengejar musuh', environmentInteraction: '', expression: 'wajah tegang, fokus',
+                    dialogueSettings: { language: 'english', style: 'serius', accent: 'inggris_amerika', tone: 'marah', speed: 'Cepat', volume: 'Keras', manual: '' }
+                },
+                {
+                    name: 'Mark', race: 'Eropa (Kaukasoid)', gender: 'Pria', age: '40-an', bodyShape: 'berisi, tinggi', face: 'wajah tirus, mata biru', clothing: 'setelan jas abu-abu, kemeja putih', props: 'koper perak', vehicle: 'mobil sedan modern', vehicleDetails: 'cat hitam, kaca gelap', vehicleControl: 'mengemudi dengan tenang tapi cepat', automaticControl: '', staticPosition: '', actionScenario: 'berlari dari musuh, melompat ke mobil', environmentInteraction: '', expression: 'wajah panik, ketakutan',
+                    dialogueSettings: { language: 'english', style: 'santai', accent: 'inggris_amerika', tone: 'cemas', speed: 'Normal', volume: 'Normal', manual: '' }
+                }
+            ],
+            interCharacterDialogue: 'John: Cepat, dia kabur!\nMark: Aku tahu! Kejar dia!',
+            narratorDialogue: 'Di tengah hiruk pikuk kota, sebuah pengejaran sengit dimulai.',
+            narratorVoiceStyle: 'Dramatic (Dramatis dan Penuh Emosi)',
+            backgroundManualDetails: 'Jalanan kota yang ramai di siang hari, gedung-gedung pencakar langit, banyak mobil dan pejalan kaki di sekitar.',
+            camera: {
+                position: 'Point-of-view (POV) shot', style: 'Handheld (Shaky cam)', effect: 'Motion Blur', lens: 'Wide-angle lens (e.g., 16mm, 24mm)', movement: 'Tracking shot (Parallel to subject)',
+                lighting: { type: 'Hard Lighting', direction: 'Backlighting', color: 'warm yellow' },
+                visualTone: { colorPalette: 'Muted', overallTone: 'Action' }
+            },
+            negativePrompt: 'buruk, cacat, distorsi, tangan aneh, watermark, teks',
+            audio: { atmosphereSound: 'suara bising kota, klakson mobil', soundEffects: 'deru mesin mobil, decitan ban', backgroundMusic: 'musik orkestra epik', narratorVoice: 'suara pria dewasa', manual: '' },
+            visualStyle: 'Cinematic'
+        },
+        'dramatic_dialogue': {
+            numCharacters: '2',
+            characters: [
+                {
+                    name: 'Elena', race: 'Asia (Mongoloid)', gender: 'Wanita', age: '20-an', bodyShape: 'langsing, proporsional', face: 'wajah cantik, mata coklat besar', clothing: 'gaun musim panas putih', props: '', vehicle: '', vehicleDetails: '', vehicleControl: '', automaticControl: '', staticPosition: 'duduk di kursi, tangan di atas meja', actionScenario: 'menatap mata lawan bicara, air mata menetes', environmentInteraction: 'menyentuh cangkir teh di meja', expression: 'wajah sedih, emosional',
+                    dialogueSettings: { language: 'indonesia', style: 'puitis', accent: 'default', tone: 'sedih', speed: 'Lambat', volume: 'Pelan', manual: '' }
+                },
+                {
+                    name: 'David', race: 'Asia (Mongoloid)', gender: 'Pria', age: '20-an', bodyShape: 'kurus, tinggi', face: 'wajah lembut, rambut bergelombang', clothing: 'kemeja biru, celana bahan', props: '', vehicle: '', vehicleDetails: '', vehicleControl: '', automaticControl: '', staticPosition: 'duduk di seberang meja, membungkuk ke depan', actionScenario: 'menghela napas berat, mencoba menenangkan', environmentInteraction: '', expression: 'wajah khawatir, mencoba sabar',
+                    dialogueSettings: { language: 'indonesia', style: 'bijaksana', accent: 'default', tone: 'tenang', speed: 'Normal', volume: 'Normal', manual: '' }
+                }
+            ],
+            interCharacterDialogue: 'Elena: Aku tidak tahu harus bagaimana lagi.\nDavid: Kita bisa lalui ini bersama, Elena. Jangan menyerah.',
+            narratorDialogue: '',
+            narratorVoiceStyle: 'Calm (Tenang dan Menenangkan)',
+            backgroundManualDetails: 'Sebuah kafe kecil dengan pencahayaan hangat, meja-meja kayu, dan jendela besar yang menunjukkan suasana hujan di luar.',
+            camera: {
+                position: 'Over-the-shoulder shot', style: 'Cinematic', effect: 'Depth of Field (Shallow)', lens: 'Standard lens (e.g., 50mm)', movement: 'Static (Tripod shot)',
+                lighting: { type: 'Soft Lighting', direction: 'Side Lighting', color: 'soft orange' },
+                visualTone: { colorPalette: 'Monochromatic', overallTone: 'Dramatic' }
+            },
+            negativePrompt: 'buruk, cacat, distorsi, watermark, teks, tidak fokus',
+            audio: { atmosphereSound: 'suara hujan, musik jazz lembut', soundEffects: 'suara denting cangkir, suara napas', backgroundMusic: 'melodi piano sedih', narratorVoice: '', manual: '' },
+            visualStyle: 'cinematic'
+        },
+        'fantasy_adventure': {
+            numCharacters: '3',
+            characters: [
+                {
+                    name: 'Elara', race: 'Elf', gender: 'Wanita', age: 'Abadi', bodyShape: 'langsing, anggun', face: 'wajah runcing, mata hijau terang', clothing: 'jubah hijau gelap dengan ornamen daun', props: 'busur panah, panah, kalung kristal', vehicle: '', vehicleDetails: '', vehicleControl: '', automaticControl: '', staticPosition: 'berdiri di atas batu besar, mengawasi', actionScenario: 'menarik tali busur, bersiap menembak', environmentInteraction: '', expression: 'wajah waspada, serius',
+                    dialogueSettings: { language: 'english', style: 'formal', accent: 'inggris_british', tone: 'dingin', speed: 'Normal', volume: 'Normal', manual: '' }
+                },
+                {
+                    name: 'Gronk', race: 'Orc', gender: 'Pria', age: '30-an', bodyShape: 'berotot, kekar', face: 'wajah kasar, taring menonjol', clothing: 'armor kulit coklat, sabuk berat', props: 'kapak besar di punggung', vehicle: '', vehicleDetails: '', vehicleControl: '', automaticControl: '', staticPosition: 'berlutut di tanah', actionScenario: 'mencari jejak di tanah, memarahi dirinya sendiri', environmentInteraction: 'menggali tanah', expression: 'wajah marah, frustrasi',
+                    dialogueSettings: { language: 'english', style: 'kasar', accent: 'default', tone: 'marah', speed: 'Normal', volume: 'Keras', manual: '' }
+                },
+                 {
+                    name: 'Lulu', race: 'Manusia', gender: 'Wanita', age: '15-an', bodyShape: 'kecil, lincah', face: 'wajah bulat, rambut pirang', clothing: 'tunuk putih kotor, celana pendek', props: 'tongkat kayu', vehicle: '', vehicleDetails: '', vehicleControl: '', automaticControl: '', staticPosition: 'duduk di bahu Gronk', actionScenario: 'menunjuk ke arah sesuatu, tertawa', environmentInteraction: 'berinteraksi dengan hewan kecil', expression: 'wajah riang, senyum lebar',
+                    dialogueSettings: { language: 'english', style: 'humoris', accent: 'default', tone: 'antusias', speed: 'Cepat', volume: 'Normal', manual: '' }
+                }
+            ],
+            interCharacterDialogue: 'Gronk: Tidak ada jejak di sini!\nElara: Terus cari, Orc bodoh!\nLulu: Lihat, ada kelinci!',
+            narratorDialogue: 'Di kedalaman hutan Elwynn yang misterius, sebuah kelompok petualang sedang dalam misi.',
+            narratorVoiceStyle: 'Mysterious (Misterius dan Menarik)',
+            backgroundManualDetails: 'Hutan lebat dengan pohon-pohon raksasa, lumut di bebatuan, dan sungai kecil yang mengalir. Suasana berkabut dan sedikit magis.',
+            camera: {
+                position: 'High-angle shot (Bird\'s-eye view)', style: 'Cinematic', effect: 'Depth of Field (Shallow)', lens: 'Wide-angle lens (e.g., 16mm, 24mm)', movement: 'Drone shot (Aerial view)',
+                lighting: { type: 'Natural Light', direction: 'Top Lighting', color: 'cool blue' },
+                visualTone: { colorPalette: 'Analogous', overallTone: 'Fantasy' }
+            },
+            negativePrompt: 'buruk, cacat, distorsi, watermark, teks, modern, kendaraan',
+            audio: { atmosphereSound: 'suara hutan, kicauan burung', soundEffects: 'suara langkah kaki, gesekan semak', backgroundMusic: 'musik orkestra epik', narratorVoice: 'suara pria dewasa', manual: '' },
+            visualStyle: 'fotorealistik'
+        },
+        'mclaren_spider': {
+            numCharacters: '1',
+            characters: [
+                {
+                    name: 'Sophia', race: 'Eropa (Kaukasoid)', gender: 'Wanita', age: '20-an', bodyShape: 'langsing, tinggi', face: 'wajah tirus, rambut pirang tergerai', clothing: 'gaun malam hitam, sepatu hak tinggi', props: 'tas tangan mewah', vehicle: 'McLaren 720S Spider', vehicleDetails: 'cat oranye cerah, interior kulit hitam', vehicleControl: 'mengemudi santai di jalanan kota', automaticControl: 'atap hardtop otomatis, pintu dihedral membuka ke atas', staticPosition: 'duduk di dalam mobil', actionScenario: 'keluar dari mobil, berdiri di samping pintu', environmentInteraction: '', expression: 'wajah percaya diri, tersenyum',
+                    dialogueSettings: { language: 'indonesia', style: 'santai', accent: 'default', tone: 'percaya diri', speed: 'Normal', volume: 'Normal', manual: '' }
+                }
+            ],
+            interCharacterDialogue: '',
+            narratorDialogue: 'McLaren 720S Spider meluncur anggun di jalanan kota, atapnya terbuka seakan menyambut malam yang cerah. Mobil berhenti. Pintu dihedral terbuka. Sophia keluar. Kemudian pintu otomatis menutup. Atap hardtop otomatis menutup perlahan selama 3 detik.',
+            narratorVoiceStyle: 'Informative (Jelas dan Lugas)',
+            backgroundManualDetails: 'Pemandangan kota metropolitan di malam hari yang ramai, lampu-lampu neon yang terang, dan lalu lintas yang padat. Jalanan basah setelah hujan.',
+            camera: {
+                position: 'Medium shot', style: 'Cinematic', effect: 'Depth of Field (Shallow)', lens: 'Anamorphic lens', movement: 'Dolly (Forward/Backward on tracks)',
+                lighting: { type: 'Artificial Light', direction: 'Front Lighting', color: 'neon blue' },
+                visualTone: { colorPalette: 'Vibrant', overallTone: 'Cool' }
+            },
+            negativePrompt: 'buruk, cacat, distorsi, tangan aneh, watermark, teks, mobil biasa',
+            audio: { atmosphereSound: 'suara bising kota, musik lounge dari restoran', soundEffects: 'deru halus mesin mobil, suara klik saat pintu membuka', backgroundMusic: 'musik jazz lembut', narratorVoice: 'suara pria dewasa', manual: 'Suara pintu dihedral membuka ke atas secara presisi selama 3 detik. Suara atap hardtop menutup otomatis selama 3 detik.' },
+            visualStyle: 'cinematic'
+        }
+    };
+    // Helper function to get value from a select element or its manual input
+    function getSelectValueWithManual(selectElem, manualElem) {
+        return selectElem.value === 'other' ? manualElem.value : (selectElem.value === 'default' ? '' : selectElem.value);
+    }
+    
+    // Function to set values for a given select element
+    function setSelectValue(selectElement, value) {
+        const options = selectElement.options;
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].value === value) {
+                selectElement.value = options[i].value;
+                return;
+            }
+        }
+        // Fallback for manual option if the value doesn't match an option
+        selectElement.value = 'other';
+    }
+    
+    // Function to set manual text inputs based on selected value
+    function setManualInput(selectElement, manualInputElement, value) {
+        if (selectElement.value === 'other') {
+            manualInputElement.value = value;
+            manualInputElement.classList.remove('hidden');
+        } else {
+            manualInputElement.value = '';
+            manualInputElement.classList.add('hidden');
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const numCharactersSelect = document.getElementById('numCharactersSelect');
+        const characterDetailsContainer = document.getElementById('characterDetailsContainer');
+        const backgroundManualDetails = document.getElementById('backgroundManualDetails');
+        const interCharacterDialogue = document.getElementById('interCharacterDialogue');
+        const narratorDialogue = document.getElementById('narratorDialogue');
+        const narratorVoiceStyle = document.getElementById('narratorVoiceStyle');
+        const narratorVoiceStyleManual = document.getElementById('narratorVoiceStyleManual');
+        const cameraPositionSelect = document.getElementById('cameraPositionSelect');
+        const cameraPositionManual = document.getElementById('cameraPositionManual');
+        const cameraStyleSelect = document.getElementById('cameraStyleSelect');
+        const cameraStyleManual = document.getElementById('cameraStyleManual');
+        const cameraEffectSelect = document.getElementById('cameraEffectSelect');
+        const cameraEffectManual = document.getElementById('cameraEffectManual');
+        const cameraLensSelect = document.getElementById('cameraLensSelect');
+        const cameraLensManual = document.getElementById('cameraLensManual');
+        const cameraMovementSelect = document.getElementById('cameraMovementSelect');
+        const cameraMovementManual = document.getElementById('cameraMovementManual');
+        const lightingTypeSelect = document.getElementById('lightingTypeSelect');
+        const lightingTypeManual = document.getElementById('lightingTypeManual');
+        const lightingDirectionSelect = document.getElementById('lightingDirectionSelect');
+        const lightingDirectionManual = document.getElementById('lightingDirectionManual');
+        const lightingColor = document.getElementById('lightingColor');
+        const colorPaletteSelect = document.getElementById('colorPaletteSelect');
+        const colorPaletteManual = document.getElementById('colorPaletteManual');
+        const overallToneSelect = document.getElementById('overallToneSelect');
+        const overallToneManual = document.getElementById('overallToneManual');
+        const negativePrompt = document.getElementById('negativePrompt');
+        const atmosphereSound = document.getElementById('atmosphereSound');
+        const soundEffects = document.getElementById('soundEffects');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const narratorVoice = document.getElementById('narratorVoice');
+        const audioManual = document.getElementById('audioManual');
+        const visualStyleRadios = document.querySelectorAll('input[name="visualStyle"]');
+        const otherVisualStyleInput = document.getElementById('otherVisualStyle');
+        const outputFormatRadios = document.querySelectorAll('input[name="outputFormat"]');
+        const generatePromptBtn = document.getElementById('generatePrompt');
+        const generatedPromptOutput = document.getElementById('generatedPrompt');
+        const copyPromptBtn = document.getElementById('copyPrompt');
+        
+        const examplePromptSelect = document.getElementById('examplePromptSelect');
+        
+        function setupManualInputToggle(selectElement, manualInputElement) {
+            selectElement.addEventListener('change', () => {
+                manualInputElement.classList.toggle('hidden', selectElement.value !== 'other');
+            });
+            manualInputElement.classList.toggle('hidden', selectElement.value !== 'other');
+        }
+        // Bind manual input toggles
+        setupManualInputToggle(cameraPositionSelect, cameraPositionManual);
+        setupManualInputToggle(cameraStyleSelect, cameraStyleManual);
+        setupManualInputToggle(cameraEffectSelect, cameraEffectManual);
+        setupManualInputToggle(cameraLensSelect, cameraLensManual);
+        setupManualInputToggle(cameraMovementSelect, cameraMovementManual);
+        setupManualInputToggle(narratorVoiceStyle, narratorVoiceStyleManual);
+        setupManualInputToggle(lightingTypeSelect, lightingTypeManual);
+        setupManualInputToggle(lightingDirectionSelect, lightingDirectionManual);
+        setupManualInputToggle(colorPaletteSelect, colorPaletteManual);
+        setupManualInputToggle(overallToneSelect, overallToneManual);
+        
+        function addCharacterInputs(num) {
+            characterDetailsContainer.innerHTML = '';
+            for (let i = 1; i <= num; i++) {
+                const div = document.createElement('div');
+                div.className = 'border-t pt-4 mt-4 first:mt-0 first:border-t-0';
+                div.innerHTML = `
+                    <h3 class="text-lg font-medium mb-2 text-gray-800">Karakter ${i}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="input-group">
+                            <label for="char${i}Name">Nama Karakter:</label>
+                            <input type="text" id="char${i}Name" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: John Doe">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}RaceSelect" class="flex items-center">
+                                Ras:
+                                <span class="tooltip-container ml-2 text-gray-500 hover:text-gray-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span class="tooltip-text">Latar belakang etnis, spesies fantasi, atau jenis fiksi ilmiah.</span>
+                                </span>
+                            </label>
+                            <select id="char${i}RaceSelect" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="default">Pilih Ras</option>
+                                <optgroup label="Manusia">
+                                    <option value="Asia Tenggara">Asia Tenggara</option>
+                                    <option value="Asia Timur">Asia Timur</option>
+                                    <option value="Eropa (Kaukasoid)">Eropa (Kaukasoid)</option>
+                                    <option value="Afrika (Negroid)">Afrika (Negroid)</option>
+                                    <option value="Timur Tengah">Timur Tengah</option>
+                                    <option value="India">India</option>
+                                    <option value="Amerika Latin">Amerika Latin</option>
+                                    <option value="Campuran">Campuran</option>
+                                </optgroup>
+                                <optgroup label="Fantasi">
+                                    <option value="Elf">Elf</option>
+                                    <option value="Orc">Orc</option>
+                                    <option value="Dwarf">Dwarf</option>
+                                    <option value="Goblin">Goblin</option>
+                                    <option value="Naga">Naga</option>
+                                    <option value="Penyihir">Penyihir</option>
+                                    <option value="Peri">Peri</option>
+                                </optgroup>
+                                <optgroup label="Fiksi Ilmiah">
+                                    <option value="Alien">Alien</option>
+                                    <option value="Robot">Robot</option>
+                                    <option value="Cyborg">Cyborg</option>
+                                    <option value="Mutan">Mutan</option>
+                                </optgroup>
+                                <option value="other">Lainnya (Manual)</option>
+                            </select>
+                            <input type="text" id="char${i}RaceManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan ras manual">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}Gender">Jenis Kelamin:</label>
+                            <input type="text" id="char${i}Gender" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: Pria, Wanita, Non-biner">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}Age">Umur:</label>
+                            <input type="text" id="char${i}Age" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 20-an, Paruh baya, Tua">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}BodyShape">Postur/Bentuk Tubuh:</label>
+                            <input type="text" id="char${i}BodyShape" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: atletis, kurus tinggi, berisi, bungkuk">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}Face">Wajah (detail):</label>
+                            <input type="text" id="char${i}Face" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: wajah tirus, mata biru, hidung mancung">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}Clothing">Pakaian (detail):</label>
+                            <input type="text" id="char${i}Clothing" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: kemeja flanel merah, celana jeans biru, sepatu kulit">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}Props">Properti/Aksesoris:</label>
+                            <input type="text" id="char${i}Props" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: memegang pedang, memakai kacamata hitam, membawa tas ransel">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}Vehicle">Kendaraan (jika ada):</label>
+                            <input type="text" id="char${i}Vehicle" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: motor sport hitam, mobil klasik merah">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}VehicleDetails">Detail Kendaraan:</label>
+                            <input type="text" id="char${i}VehicleDetails" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: knalpot racing, cat doff, velg chrome">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}VehicleControl">Kontrol Kendaraan:</label>
+                            <input type="text" id="char${i}VehicleControl" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: mengemudi dengan cepat, parkir presisi, melayang di udara">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}AutomaticControl">Kontrol Otomatis Kendaraan (Jika Ada):</label>
+                            <input type="text" id="char${i}AutomaticControl" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: atap hardtop otomatis menutup dalam 3 detik">
+                        </div>
+                        <div class="input-group">
+                            <label for="char${i}StaticPosition">Posisi Statis Karakter:</label>
+                            <input type="text" id="char${i}StaticPosition" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: berdiri tegak, tangan di saku, duduk di kursi">
+                        </div>
+                        <div class="input-group col-span-full">
+                            <label for="char${i}ActionScenario">Kontrol Aksi/Skenario Karakter:</label>
+                            <input type="text" id="char${i}ActionScenario" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: berlari kencang sambil menghindari rintangan, melambaikan tangan dengan riang, berdebat sengit">
+                        </div>
+                        <div class="input-group col-span-full">
+                            <label for="char${i}EnvironmentInteraction">Interaksi dengan Lingkungan:</label>
+                            <input type="text" id="char${i}EnvironmentInteraction" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: membuka pintu, menyentuh dinding, berjalan di atas air, berinteraksi dengan hewan">
+                        </div>
+                        <div class="input-group col-span-full">
+                            <label for="char${i}Expression">Ekspresi/Emosi:</label>
+                            <input type="text" id="char${i}Expression" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: tersenyum lebar, wajah sedih, mata melotot, ekspresi terkejut">
+                        </div>
+                        <div class="col-span-full border-t pt-4 mt-4">
+                            <h4 class="text-md font-semibold mb-2 text-gray-700">Pengaturan Suara Dialog Karakter ${i}</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="input-group">
+                                    <label for="char${i}DialogueLanguage">Bahasa:</label>
+                                    <select id="char${i}DialogueLanguage" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                        <option value="default">Pilih Bahasa</option>
+                                        <option value="indonesia">Indonesia</option>
+                                        <option value="english">English</option>
+                                        <option value="sunda">Sunda</option>
+                                        <option value="betawi">Betawi</option>
+                                        <option value="jawa">Jawa</option>
+                                        <option value="batak">Batak</option>
+                                        <option value="minang">Minang</option>
+                                        <option value="mandarin">Mandarin</option>
+                                        <option value="jepang">Jepang</option>
+                                        <option value="korea">Korea</option>
+                                        <option value="arab">Arab</option>
+                                        <option value="prancis">Prancis</option>
+                                        <option value="spanyol">Spanyol</option>
+                                        <option value="jerman">Jerman</option>
+                                        <option value="rusia">Rusia</option>
+                                        <option value="portugis">Portugis</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="char${i}DialogueStyle">Gaya Bicara:</label>
+                                    <select id="char${i}DialogueStyle" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                        <option value="default">Pilih Gaya</option>
+                                        <option value="formal">Formal</option>
+                                        <option value="santai">Santai</option>
+                                        <option value="puitis">Puitis</option>
+                                        <option value="humoris">Humoris</option>
+                                        <option value="serius">Serius</option>
+                                        <option value="bersemangat">Bersemangat</option>
+                                        <option value="sinis">Sinis</option>
+                                        <option value="bijaksana">Bijaksana</option>
+                                        <option value="kasar">Kasar</option>
+                                        <option value="lembut">Lembut</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="char${i}DialogueAccent">Logat:</label>
+                                    <select id="char${i}DialogueAccent" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                        <option value="default">Pilih Logat</option>
+                                        <option value="medan">Medan</option>
+                                        <option value="jawa_halus">Jawa Halus</option>
+                                        <option value="jawa_kasar">Jawa Kasar</option>
+                                        <option value="sunda_priangan">Sunda Priangan</option>
+                                        <option value="betawi">Betawi</option>
+                                        <option value="batak_toba">Batak Toba</option>
+                                        <option value="jakarta">Jakarta</option>
+                                        <option value="makassar">Makassar</option>
+                                        <option value="surabaya">Surabaya</option>
+                                        <option value="bali">Bali</option>
+                                        <option value="malaysia">Malaysia</option>
+                                        <option value="singapura">Singapura</option>
+                                        <option value="inggris_british">Inggris (British)</option>
+                                        <option value="inggris_amerika">Inggris (Amerika)</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="char${i}DialogueTone">Nada:</label>
+                                    <select id="char${i}DialogueTone" class="shadow border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                        <option value="default">Pilih Nada</option>
+                                        <option value="gembira">Gembira</option>
+                                        <option value="sedih">Sedih</option>
+                                        <option value="marah">Marah</option>
+                                        <option value="tenang">Tenang</option>
+                                        <option value="cemas">Cemas</option>
+                                        <option value="ragu">Ragu</option>
+                                        <option value="optimis">Optimis</option>
+                                        <option value="pesimis">Pesimis</option>
+                                        <option value="antusias">Antusias</option>
+                                        <option value="dingin">Dingin</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="char${i}DialogueSpeed">Kecepatan Bicara:</label>
+                                    <select id="char${i}DialogueSpeed" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                        <option value="default">Pilih Kecepatan</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Cepat">Cepat</option>
+                                        <option value="Lambat">Lambat</option>
+                                        <option value="Jeda Dramatis">Jeda Dramatis</option>
+                                        <option value="other">Lainnya (Manual)</option>
+                                    </select>
+                                    <input type="text" id="char${i}DialogueSpeedManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan kecepatan bicara manual">
+                                </div>
+                                <div class="input-group">
+                                    <label for="char${i}DialogueVolume">Volume Suara:</label>
+                                    <select id="char${i}DialogueVolume" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                        <option value="default">Pilih Volume</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Keras">Keras</option>
+                                        <option value="Pelan">Pelan</option>
+                                        <option value="Berbisik">Berbisik</option>
+                                        <option value="Berteriak">Berteriak</option>
+                                        <option value="other">Lainnya (Manual)</option>
+                                    </select>
+                                    <input type="text" id="char${i}DialogueVolumeManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2 hidden" placeholder="Masukkan volume suara manual">
+                                </div>
+                            </div>
+                            <div class="input-group mt-2">
+                                <label for="char${i}DialogueManual" class="block text-gray-700 text-sm font-bold mb-2">Input Manual Gaya/Logat/Nada/Kecepatan/Volume (opsional):</label>
+                                <input type="text" id="char${i}DialogueManual" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Contoh: 'Gaya bicara sarkastik dengan logat Betawi dan nada meremehkan, kecepatan cepat'">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                characterDetailsContainer.appendChild(div);
+                // Setup manual input toggles for new dialogue settings per character
+                setupManualInputToggle(document.getElementById(`char${i}DialogueSpeed`), document.getElementById(`char${i}DialogueSpeedManual`));
+                setupManualInputToggle(document.getElementById(`char${i}DialogueVolume`), document.getElementById(`char${i}DialogueVolumeManual`));
+                setupManualInputToggle(document.getElementById(`char${i}RaceSelect`), document.getElementById(`char${i}RaceManual`));
+            }
+        }
+        
+        // Initial call for 1 character
+        addCharacterInputs(parseInt(numCharactersSelect.value));
+        
+        // Function to populate the form with example data
+        function populateForm(data) {
+            // Reset form first
+            numCharactersSelect.value = data.numCharacters;
+            addCharacterInputs(data.numCharacters);
+            
+            // Populate Character Data
+            data.characters.forEach((char, index) => {
+                const i = index + 1;
+                document.getElementById(`char${i}Name`).value = char.name || '';
+                setSelectValue(document.getElementById(`char${i}RaceSelect`), char.race);
+                setManualInput(document.getElementById(`char${i}RaceSelect`), document.getElementById(`char${i}RaceManual`), char.race);
+                document.getElementById(`char${i}Gender`).value = char.gender || '';
+                document.getElementById(`char${i}Age`).value = char.age || '';
+                document.getElementById(`char${i}BodyShape`).value = char.bodyShape || '';
+                document.getElementById(`char${i}Face`).value = char.face || '';
+                document.getElementById(`char${i}Clothing`).value = char.clothing || '';
+                document.getElementById(`char${i}Props`).value = char.props || '';
+                document.getElementById(`char${i}Vehicle`).value = char.vehicle || '';
+                document.getElementById(`char${i}VehicleDetails`).value = char.vehicleDetails || '';
+                document.getElementById(`char${i}VehicleControl`).value = char.vehicleControl || '';
+                document.getElementById(`char${i}AutomaticControl`).value = char.automaticControl || '';
+                document.getElementById(`char${i}StaticPosition`).value = char.staticPosition || '';
+                document.getElementById(`char${i}ActionScenario`).value = char.actionScenario || '';
+                document.getElementById(`char${i}EnvironmentInteraction`).value = char.environmentInteraction || '';
+                document.getElementById(`char${i}Expression`).value = char.expression || '';
+                
+                if (char.dialogueSettings) {
+                    const dialogueSettings = char.dialogueSettings;
+                    setSelectValue(document.getElementById(`char${i}DialogueLanguage`), dialogueSettings.language);
+                    setSelectValue(document.getElementById(`char${i}DialogueStyle`), dialogueSettings.style);
+                    setSelectValue(document.getElementById(`char${i}DialogueAccent`), dialogueSettings.accent);
+                    setSelectValue(document.getElementById(`char${i}DialogueTone`), dialogueSettings.tone);
+                    setSelectValue(document.getElementById(`char${i}DialogueSpeed`), dialogueSettings.speed);
+                    setManualInput(document.getElementById(`char${i}DialogueSpeed`), document.getElementById(`char${i}DialogueSpeedManual`), dialogueSettings.speed);
+                    setSelectValue(document.getElementById(`char${i}DialogueVolume`), dialogueSettings.volume);
+                    setManualInput(document.getElementById(`char${i}DialogueVolume`), document.getElementById(`char${i}DialogueVolumeManual`), dialogueSettings.volume);
+                    document.getElementById(`char${i}DialogueManual`).value = dialogueSettings.manual || '';
+                }
+            });
+            
+            // Populate Background
+            backgroundManualDetails.value = data.backgroundManualDetails || '';
+            
+            // Populate Dialogue
+            interCharacterDialogue.value = data.interCharacterDialogue || '';
+            narratorDialogue.value = data.narratorDialogue || '';
+            setSelectValue(narratorVoiceStyle, data.narratorVoiceStyle);
+            setManualInput(narratorVoiceStyle, narratorVoiceStyleManual, data.narratorVoiceStyle);
+            
+            // Populate Camera Settings
+            if (data.camera) {
+                setSelectValue(cameraPositionSelect, data.camera.position);
+                setManualInput(cameraPositionSelect, cameraPositionManual, data.camera.position);
+                setSelectValue(cameraStyleSelect, data.camera.style);
+                setManualInput(cameraStyleSelect, cameraStyleManual, data.camera.style);
+                setSelectValue(cameraEffectSelect, data.camera.effect);
+                setManualInput(cameraEffectSelect, cameraEffectManual, data.camera.effect);
+                setSelectValue(cameraLensSelect, data.camera.lens);
+                setManualInput(cameraLensSelect, cameraLensManual, data.camera.lens);
+                setSelectValue(cameraMovementSelect, data.camera.movement);
+                setManualInput(cameraMovementSelect, cameraMovementManual, data.camera.movement);
+            }
+            if (data.camera.lighting) {
+                setSelectValue(lightingTypeSelect, data.camera.lighting.type);
+                setManualInput(lightingTypeSelect, lightingTypeManual, data.camera.lighting.type);
+                setSelectValue(lightingDirectionSelect, data.camera.lighting.direction);
+                setManualInput(lightingDirectionSelect, lightingDirectionManual, data.camera.lighting.direction);
+                lightingColor.value = data.camera.lighting.color || '';
+            }
+            if (data.camera.visualTone) {
+                setSelectValue(colorPaletteSelect, data.camera.visualTone.colorPalette);
+                setManualInput(colorPaletteSelect, colorPaletteManual, data.camera.visualTone.colorPalette);
+                setSelectValue(overallToneSelect, data.camera.visualTone.overallTone);
+                setManualInput(overallToneSelect, overallToneManual, data.camera.visualTone.overallTone);
+            }
+            
+            // Populate Negative Prompt
+            negativePrompt.value = data.negativePrompt || '';
+            
+            // Populate Audio
+            if (data.audio) {
+                atmosphereSound.value = data.audio.atmosphereSound || '';
+                soundEffects.value = data.audio.soundEffects || '';
+                backgroundMusic.value = data.audio.backgroundMusic || '';
+                narratorVoice.value = data.audio.narratorVoice || '';
+                audioManual.value = data.audio.manual || '';
+            }
+            
+            // Populate Visual Style
+            const visualStyleRadiosArray = Array.from(visualStyleRadios);
+            const matchingRadio = visualStyleRadiosArray.find(radio => radio.value === data.visualStyle);
+            if (matchingRadio) {
+                matchingRadio.checked = true;
+                otherVisualStyleInput.value = '';
+                otherVisualStyleInput.disabled = true;
+            } else {
+                const otherVisualStyleRadio = document.querySelector('input[name="visualStyle"][value="gaya_lain"]');
+                if (otherVisualStyleRadio) {
+                    otherVisualStyleRadio.checked = true;
+                    otherVisualStyleInput.value = data.visualStyle;
+                    otherVisualStyleInput.disabled = false;
+                }
+            }
+        }
+        
+        // Event listener for number of characters change
+        numCharactersSelect.addEventListener('change', (e) => {
+            const num = parseInt(e.target.value);
+            addCharacterInputs(num);
+        });
+        // Event listener for example prompt selection
+        examplePromptSelect.addEventListener('change', (e) => {
+            const selectedExample = e.target.value;
+            if (selectedExample !== 'default') {
+                populateForm(examplePrompts[selectedExample]);
+            }
+        });
+        // Event listener for "Gaya Lain" radio button
+        visualStyleRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                otherVisualStyleInput.disabled = radio.value !== 'gaya_lain';
+                if (radio.value !== 'gaya_lain') {
+                    otherVisualStyleInput.value = '';
+                }
+            });
+        });
+        // Initial state for "Gaya Lain"
+        otherVisualStyleInput.disabled = true;
+        
+        // Generate Prompt button click
+        generatePromptBtn.addEventListener('click', () => {
+            const spinner = document.getElementById('generateLoadingSpinner');
+            spinner.style.display = 'inline-block';
+            generatedPromptOutput.value = 'Membuat prompt, mohon tunggu...';
+            
+            setTimeout(() => { // Simulate generation time
+                let promptParts = [];
+                // 1. KARAKTER
+                const numChars = parseInt(numCharactersSelect.value);
+                let charactersData = []; // For JSON output
+                let charDescriptions = [];
+                for (let i = 1; i <= numChars; i++) {
+                    const charName = document.getElementById(`char${i}Name`).value || `Karakter ${i}`;
+                    
+                    const charRace = getSelectValueWithManual(document.getElementById(`char${i}RaceSelect`), document.getElementById(`char${i}RaceManual`));
+                    
+                    const char = {
+                        name: charName,
+                        race: charRace,
+                        gender: document.getElementById(`char${i}Gender`).value,
+                        age: document.getElementById(`char${i}Age`).value,
+                        bodyShape: document.getElementById(`char${i}BodyShape`).value,
+                        face: document.getElementById(`char${i}Face`).value,
+                        clothing: document.getElementById(`char${i}Clothing`).value,
+                        props: document.getElementById(`char${i}Props`).value,
+                        vehicle: document.getElementById(`char${i}Vehicle`).value,
+                        vehicleDetails: document.getElementById(`char${i}VehicleDetails`).value,
+                        vehicleControl: document.getElementById(`char${i}VehicleControl`).value,
+                        automaticControl: document.getElementById(`char${i}AutomaticControl`).value,
+                        staticPosition: document.getElementById(`char${i}StaticPosition`).value,
+                        actionScenario: document.getElementById(`char${i}ActionScenario`).value,
+                        environmentInteraction: document.getElementById(`char${i}EnvironmentInteraction`).value,
+                        expression: document.getElementById(`char${i}Expression`).value,
+                        dialogueSettings: {
+                            language: document.getElementById(`char${i}DialogueLanguage`).value,
+                            style: document.getElementById(`char${i}DialogueStyle`).value,
+                            accent: document.getElementById(`char${i}DialogueAccent`).value,
+                            tone: document.getElementById(`char${i}DialogueTone`).value,
+                            speed: getSelectValueWithManual(document.getElementById(`char${i}DialogueSpeed`), document.getElementById(`char${i}DialogueSpeedManual`)),
+                            volume: getSelectValueWithManual(document.getElementById(`char${i}DialogueVolume`), document.getElementById(`char${i}DialogueVolumeManual`)),
+                            manual: document.getElementById(`char${i}DialogueManual`).value
+                        }
+                    };
+                    charactersData.push(char); // Add to JSON data
+                    let charDesc = `  - Nama: ${char.name}.`;
+                    if (char.race) charDesc += ` Ras: ${char.race}.`;
+                    if (char.gender) charDesc += ` Jenis Kelamin: ${char.gender}.`;
+                    if (char.age) charDesc += ` Umur: ${char.age}.`;
+                    if (char.bodyShape) charDesc += ` Postur/Bentuk Tubuh: ${char.bodyShape}.`;
+                    if (char.face) charDesc += ` Wajah: ${char.face}.`;
+                    if (char.clothing) charDesc += ` Pakaian: ${char.clothing}.`;
+                    if (char.props) charDesc += ` Properti/Aksesoris: ${char.props}.`;
+                    if (char.vehicle) charDesc += ` Kendaraan: ${char.vehicle}.`;
+                    if (char.vehicleDetails) charDesc += ` Detail Kendaraan: ${char.vehicleDetails}.`;
+                    if (char.vehicleControl) charDesc += ` Kontrol Kendaraan: ${char.vehicleControl}.`;
+                    if (char.automaticControl) charDesc += ` Kontrol Otomatis: ${char.automaticControl}.`;
+                    if (char.staticPosition) charDesc += ` Posisi Statis: ${char.staticPosition}.`;
+                    if (char.actionScenario) charDesc += ` Aksi/Skenario: ${char.actionScenario}.`;
+                    if (char.environmentInteraction) charDesc += ` Interaksi Lingkungan: ${char.environmentInteraction}.`;
+                    if (char.expression) charDesc += ` Ekspresi/Emosi: ${char.expression}.`;
+                    let charDialogueSettings = [];
+                    if (char.dialogueSettings.language !== 'default') charDialogueSettings.push(`Bahasa: ${char.dialogueSettings.language}`);
+                    if (char.dialogueSettings.style !== 'default') charDialogueSettings.push(`Gaya Bicara: ${char.dialogueSettings.style}`);
+                    if (char.dialogueSettings.accent !== 'default') charDialogueSettings.push(`Logat: ${char.dialogueSettings.accent}`);
+                    if (char.dialogueSettings.tone !== 'default') charDialogueSettings.push(`Nada: ${char.dialogueSettings.tone}`);
+                    if (char.dialogueSettings.speed && char.dialogueSettings.speed !== 'default') charDialogueSettings.push(`Kecepatan: ${char.dialogueSettings.speed}`);
+                    if (char.dialogueSettings.volume && char.dialogueSettings.volume !== 'default') charDialogueSettings.push(`Volume: ${char.dialogueSettings.volume}`);
+                    if (char.dialogueSettings.manual) charDialogueSettings.push(`Manual: ${char.dialogueSettings.manual}`);
+                    if (charDialogueSettings.length > 0) {
+                        charDesc += ` Pengaturan Suara: (${charDialogueSettings.join(', ')})`;
+                    }
+                    charDescriptions.push(charDesc.trim());
+                }
+                if (charDescriptions.length > 0) {
+                    promptParts.push(`KARAKTER:\n${charDescriptions.join('\n')}`);
+                }
+                
+                // 2. LATAR BELAKANG
+                let backgroundDesc = `LATAR BELAKANG:`;
+                if (backgroundManualDetails.value) {
+                    backgroundDesc += ` ${backgroundManualDetails.value}.`;
+                } else {
+                    backgroundDesc += ` [Deskripsi latar belakang sangat detail, konsisten dan akurat].`;
+                }
+                promptParts.push(backgroundDesc.trim());
+                
+                // 3. DIALOG
+                let dialogueContent = [];
+                if (interCharacterDialogue.value) {
+                    dialogueContent.push(`Skenario Dialog Lengkap:\n${interCharacterDialogue.value}`);
+                }
+                if (narratorDialogue.value) {
+                    dialogueContent.push(`Narasi/Dialog Umum: "${narratorDialogue.value}"`);
+                }
+                let narratorVoiceStyleValue = getSelectValueWithManual(narratorVoiceStyle, narratorVoiceStyleManual);
+                if (narratorVoiceStyleValue) {
+                    dialogueContent.push(`Gaya Suara Narator: ${narratorVoiceStyleValue}`);
+                }
+                if (dialogueContent.length > 0) {
+                    promptParts.push(`DIALOG:\n${dialogueContent.join('\n\n')}`);
+                }
+                
+                // 4. PENGATURAN KAMERA
+                let cameraSettings = [];
+                const position = getSelectValueWithManual(cameraPositionSelect, cameraPositionManual);
+                const style = getSelectValueWithManual(cameraStyleSelect, cameraStyleManual);
+                const effect = getSelectValueWithManual(cameraEffectSelect, cameraEffectManual);
+                const lens = getSelectValueWithManual(cameraLensSelect, cameraLensManual);
+                const movement = getSelectValueWithManual(cameraMovementSelect, cameraMovementManual);
+                if (position) cameraSettings.push(`Posisi Kamera: ${position}`);
+                if (style) cameraSettings.push(`Gaya Kamera: ${style}`);
+                if (effect) cameraSettings.push(`Efek Kamera: ${effect}`);
+                if (lens) cameraSettings.push(`Lensa Kamera: ${lens}`);
+                if (movement) cameraSettings.push(`Gerakan Kamera: ${movement}`);
+                let lightingSettings = [];
+                const lightingType = getSelectValueWithManual(lightingTypeSelect, lightingTypeManual);
+                const lightingDirection = getSelectValueWithManual(lightingDirectionSelect, lightingDirectionManual);
+                const lightingColorValue = lightingColor.value;
+                if (lightingType) lightingSettings.push(`Jenis: ${lightingType}`);
+                if (lightingDirection) lightingSettings.push(`Arah: ${lightingDirection}`);
+                if (lightingColorValue) lightingSettings.push(`Warna: ${lightingColorValue}`);
+                if (lightingSettings.length > 0) {
+                    cameraSettings.push(`Pencahayaan:\n    - ${lightingSettings.join('\n    - ')}`);
+                }
+                let visualToneSettings = [];
+                const colorPalette = getSelectValueWithManual(colorPaletteSelect, colorPaletteManual);
+                const overallTone = getSelectValueWithManual(overallToneSelect, overallToneManual);
+                if (colorPalette) visualToneSettings.push(`Palet Warna: ${colorPalette}`);
+                if (overallTone) visualToneSettings.push(`Nada Visual Keseluruhan: ${overallTone}`);
+                if (visualToneSettings.length > 0) {
+                    cameraSettings.push(`Nada Visual:\n    - ${visualToneSettings.join('\n    - ')}`);
+                }
+                if (cameraSettings.length > 0) {
+                    promptParts.push(`PENGATURAN KAMERA:\n  - ${cameraSettings.join('\n  - ')}`);
+                }
+                
+                // 5. PROMPT NEGATIF
+                if (negativePrompt.value) {
+                    promptParts.push(`PROMPT NEGATIF:\n${negativePrompt.value}`);
+                }
+                
+                // 6. AUDIO
+                let audioSettings = [];
+                if (atmosphereSound.value) audioSettings.push(`Suara Suasana: ${atmosphereSound.value}`);
+                if (soundEffects.value) audioSettings.push(`Efek Suara Spesifik: ${soundEffects.value}`);
+                if (backgroundMusic.value) audioSettings.push(`Musik Latar (Deskripsi Genre/Mood): ${backgroundMusic.value}`);
+                if (narratorVoice.value) audioSettings.push(`Suara Narator (Deskripsi Umum): ${narratorVoice.value}`);
+                if (audioManual.value) audioSettings.push(`Detail Manual: ${audioManual.value}`);
+                if (audioSettings.length > 0) {
+                    promptParts.push(`AUDIO:\n  - ${audioSettings.join('\n  - ')}`);
+                }
+                
+                // 7. GAYA VISUAL
+                let selectedVisualStyle = '';
+                const visualStyleRadiosArray = Array.from(visualStyleRadios);
+                visualStyleRadiosArray.forEach(radio => {
+                    if (radio.checked) {
+                        selectedVisualStyle = radio.value;
+                    }
+                });
+                let visualStyleText = '';
+                if (selectedVisualStyle === 'gaya_lain' && otherVisualStyleInput.value) {
+                    visualStyleText = otherVisualStyleInput.value;
+                } else if (selectedVisualStyle && selectedVisualStyle !== 'gaya_lain') {
+                    visualStyleText = selectedVisualStyle;
+                }
+                if (visualStyleText) {
+                    promptParts.push(`GAYA VISUAL:\n${visualStyleText}`);
+                }
+                let finalPrompt = promptParts.filter(part => part.trim() !== '').join('\n\n---\n\n');
+                
+                // Format Output
+                let selectedOutputFormat = 'indonesia';
+                outputFormatRadios.forEach(radio => {
+                    if (radio.checked) {
+                        selectedOutputFormat = radio.value;
+                    }
+                });
+                if (selectedOutputFormat === 'json') {
+                    const jsonOutput = {
+                        characters: charactersData,
+                        background: {
+                            manualDetails: backgroundManualDetails.value,
+                            description: backgroundManualDetails.value || '[Highly detailed, consistent and accurate background description]'
+                        },
+                        dialogue: {
+                            interCharacterScript: interCharacterDialogue.value,
+                            narratorText: narratorDialogue.value,
+                            narratorVoiceStyle: narratorVoiceStyleValue
+                        },
+                        camera: {
+                            position: position,
+                            style: style,
+                            effect: effect,
+                            lens: lens,
+                            movement: movement,
+                            lighting: {
+                                type: lightingType,
+                                direction: lightingDirection,
+                                color: lightingColorValue
+                            },
+                            visualTone: {
+                                colorPalette: colorPalette,
+                                overallTone: overallTone
+                            }
+                        },
+                        negativePrompt: negativePrompt.value,
+                        audio: {
+                            atmosphereSound: atmosphereSound.value,
+                            soundEffects: soundEffects.value,
+                            backgroundMusic: backgroundMusic.value,
+                            narratorVoice: narratorVoice.value,
+                            manual: audioManual.value
+                        },
+                        visualStyle: selectedVisualStyle === 'gaya_lain' ? otherVisualStyleInput.value : selectedVisualStyle,
+                        fullPromptText: finalPrompt // Include the text version for reference
+                    };
+                    generatedPromptOutput.value = JSON.stringify(jsonOutput, null, 2);
+                } else if (selectedOutputFormat === 'english') {
+                    let englishPrompt = finalPrompt
+                        .replace(/KARAKTER:/g, 'CHARACTERS:')
+                        .replace(/Nama:/g, 'Name:')
+                        .replace(/Ras:/g, 'Race:')
+                        .replace(/Jenis Kelamin:/g, 'Gender:')
+                        .replace(/Umur:/g, 'Age:')
+                        .replace(/Postur\/Bentuk Tubuh:/g, 'Posture/Body Shape:')
+                        .replace(/Wajah:/g, 'Face:')
+                        .replace(/Pakaian:/g, 'Clothing:')
+                        .replace(/Properti\/Aksesoris:/g, 'Props/Accessories:')
+                        .replace(/Kendaraan:/g, 'Vehicle:')
+                        .replace(/Detail Kendaraan:/g, 'Vehicle Details:')
+                        .replace(/Kontrol Kendaraan:/g, 'Vehicle Control:')
+                        .replace(/Kontrol Otomatis:/g, 'Automatic Control:')
+                        .replace(/Posisi Statis:/g, 'Static Position:')
+                        .replace(/Aksi\/Skenario:/g, 'Action/Scenario:')
+                        .replace(/Interaksi Lingkungan:/g, 'Environment Interaction:')
+                        .replace(/Ekspresi\/Emosi:/g, 'Expression/Emotion:')
+                        .replace(/Pengaturan Suara:/g, 'Voice Settings:')
+                        .replace(/LATAR BELAKANG:/g, 'BACKGROUND:')
+                        .replace(/\[Deskripsi latar belakang sangat detail, konsisten dan akurat\]\./g, '[Highly detailed, consistent and accurate background description].')
+                        .replace(/DIALOG:/g, 'DIALOGUE:')
+                        .replace(/Skenario Dialog Lengkap:/g, 'Full Dialogue Scenario:')
+                        .replace(/Narasi\/Dialog Umum:/g, 'General Narration/Dialogue:')
+                        .replace(/Gaya Suara Narator:/g, 'Narrator Voice Style:')
+                        .replace(/Bahasa:/g, 'Language:')
+                        .replace(/Gaya Bicara:/g, 'Speaking Style:')
+                        .replace(/Logat:/g, 'Accent:')
+                        .replace(/Nada:/g, 'Tone:')
+                        .replace(/Kecepatan:/g, 'Speed:')
+                        .replace(/Volume:/g, 'Volume:')
+                        .replace(/PENGATURAN KAMERA:/g, 'CAMERA SETTINGS:')
+                        .replace(/Posisi Kamera:/g, 'Camera Position:')
+                        .replace(/Gaya Kamera:/g, 'Camera Style:')
+                        .replace(/Efek Kamera:/g, 'Camera Effect:')
+                        .replace(/Lensa Kamera:/g, 'Camera Lens:')
+                        .replace(/Gerakan Kamera:/g, 'Camera Movement:')
+                        .replace(/Pencahayaan:\n    -/g, 'Lighting:\n    -')
+                        .replace(/Jenis:/g, 'Type:')
+                        .replace(/Arah:/g, 'Direction:')
+                        .replace(/Warna:/g, 'Color:')
+                        .replace(/Nada Visual:\n    -/g, 'Visual Tone:\n    -')
+                        .replace(/Palet Warna:/g, 'Color Palette:')
+                        .replace(/Nada Visual Keseluruhan:/g, 'Overall Visual Tone:')
+                        .replace(/PROMPT NEGATIF:/g, 'NEGATIVE PROMPT:')
+                        .replace(/AUDIO:/g, 'AUDIO:')
+                        .replace(/Suara Suasana:/g, 'Atmosphere Sound:')
+                        .replace(/Efek Suara Spesifik:/g, 'Specific Sound Effects:')
+                        .replace(/Musik Latar \(Deskripsi Genre\/Mood\):/g, 'Background Music (Genre/Mood):')
+                        .replace(/Suara Narator \(Deskripsi Umum\):/g, 'Narrator Voice (General Description):')
+                        .replace(/GAYA VISUAL:/g, 'VISUAL STYLE:')
+                        .replace(/Realistis/g, 'Realistic')
+                        .replace(/Sinematik/g, 'Cinematic')
+                        .replace(/Super Asli Nyata/g, 'Hyper-realistic')
+                        .replace(/Animasi/g, 'Animated')
+                        .replace(/Kartun/g, 'Cartoon')
+                        .replace(/Lukisan/g, 'Painting')
+                        .replace(/Fotorealistik/g, 'Photorealistic')
+                        .replace(/(\r\n|\r|\n)/g, '$1') // Handle line breaks
+                        .replace(/(John|Mark|Elena|David|Elara|Gronk|Lulu):/g, (match, p1) => {
+                            return p1.charAt(0).toUpperCase() + p1.slice(1) + ':';
+                        });
+                    generatedPromptOutput.value = englishPrompt;
+                } else {
+                    generatedPromptOutput.value = finalPrompt;
+                }
+                spinner.style.display = 'none';
+            }, 500); // Simulate generation time
+        });
+        
+        // Copy to clipboard functionality
+        copyPromptBtn.addEventListener('click', () => {
+            generatedPromptOutput.select();
+            document.execCommand('copy');
+            copyPromptBtn.textContent = 'Disalin!';
+            setTimeout(() => {
+                copyPromptBtn.textContent = 'Salin';
+            }, 2000);
+        });
+    });
+</script>
