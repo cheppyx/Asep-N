@@ -1,0 +1,98 @@
+<?php
+// Set header untuk mengizinkan CORS
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Content-Type: application/json');
+
+// Jika ini adalah preflight request (OPTIONS), kirim respons OK dan keluar
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+// PENTING: Masukkan Google API Key Anda di sini
+// Ganti "YOUR_GOOGLE_API_KEY" dengan kunci API yang Anda dapatkan dari Google AI Studio.
+$apiKey = "YOUR_GOOGLE_API_KEY";
+
+if (empty($apiKey) || $apiKey === "YOUR_GOOGLE_API_KEY") {
+    echo json_encode(['success' => false, 'error' => 'API Key tidak ditemukan. Harap masukkan kunci API di file generate-prompt.php']);
+    exit;
+}
+
+$input = file_get_contents('php://input');
+$payload = json_decode($input, true);
+
+if ($payload === null) {
+    echo json_encode(['success' => false, 'error' => 'Invalid JSON input']);
+    exit;
+}
+
+// Prepare the Gemini API request
+$requestUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=" . $apiKey;
+$requestBody = [
+    'contents' => [
+        [
+            'role' => 'user',
+            'parts' => []
+        ]
+    ]
+];
+
+// Append text from payload
+if (isset($payload['promptText'])) {
+    $requestBody['contents'][0]['parts'][] = ['text' => $payload['promptText']];
+}
+
+// Append image data if available
+if (isset($payload['imageData'])) {
+    $base64ImageData = explode(',', $payload['imageData'])[1];
+    $requestBody['contents'][0]['parts'][] = [
+        'inlineData' => [
+            'mimeType' => 'image/png',
+            'data' => $base64ImageData
+        ]
+    ];
+}
+
+$options = [
+    'http' => [
+        'header'  => "Content-Type: application/json",
+        'method'  => 'POST',
+        'content' => json_encode($requestBody),
+        'timeout' => 60, // Set timeout to 60 seconds
+    ],
+];
+
+// Initialize cURL for a more reliable request
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $requestUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestBody));
+curl_setopt($ch, CURLOPT_TIMEOUT, 60); // Set timeout to 60 seconds
+
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curlError = curl_error($ch);
+curl_close($ch);
+
+if ($response === false) {
+    echo json_encode(['success' => false, 'error' => 'cURL error: ' . $curlError]);
+    exit;
+}
+
+$apiResponse = json_decode($response, true);
+
+if ($httpCode !== 200) {
+    echo json_encode(['success' => false, 'error' => 'API call failed with HTTP status ' . $httpCode, 'details' => $apiResponse]);
+    exit;
+}
+
+if (isset($apiResponse['candidates'][0]['content']['parts'][0]['text'])) {
+    echo json_encode(['success' => true, 'text' => $apiResponse['candidates'][0]['content']['parts'][0]['text']]);
+} else {
+    echo json_encode(['success' => false, 'error' => 'Invalid API response structure', 'response' => $apiResponse]);
+}
+?>
